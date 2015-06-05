@@ -1,39 +1,14 @@
-.inner.cover
-.row
-  form
-    h1.cover-heading Generador de RUT
-    p.lead
-      | Así de simple. Tienes dos opciones:
-    p.lead
-      input(type='text', placeholder='comienza a escribir un RUT')
-    p.lead o si no te gusta escribir
-    p.lead
-      button.btn.btn-lg.btn-default Genera RUTs al azar
-.inner.cover
+.inner.cover(ng-controller="RutController as rutCtrl")
   .row
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
+    form
+      h1.cover-heading Generador de RUT
+      p.lead
+        | Así de simple. Tienes dos opciones:
+      p.lead
+        input(type='text', placeholder='comienza a escribir un RUT')
+      p.lead o si no te gusta escribir
+      p.lead
+        button.btn.btn-lg.btn-default(ng-click="rutCtrl.generateRut()") Genera RUTs al azar
   .row
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-  .row
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
-    .col-md-3
-      h4 12.345.678-9
+    .col-md-3(ng-repeat="rut in rutCtrl.ruts")
+      h4 {{ rut.number}}-{{ rut.mod}}
