@@ -35,3 +35,7 @@ do ->
       if S then S - 1 else 'K'
 
     this.generateRut()
+
+  app.filter 'rutFormat', ->
+    (input) ->
+      input.number.toLocaleString('cl-ES') + '-' + input.mod;

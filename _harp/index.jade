@@ -11,4 +11,4 @@
         button.btn.btn-lg.btn-default(ng-click="rutCtrl.generateRut()") Genera RUTs al azar
   .row
     .col-md-3(ng-repeat="rut in rutCtrl.ruts")
-      h4 {{ rut.number}}-{{ rut.mod}}
+      h4 {{ rut | rutFormat }}
