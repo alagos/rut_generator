@@ -1,5 +1,5 @@
 do ->
-  app = angular.module('app', [])
+  app = angular.module('app', ['angular-select-text'])
 
   app.controller 'RutController', ->
     this.ruts = []
