@@ -1,7 +1,7 @@
 do ->
   app = angular.module('app', ['angular-select-text'])
 
-  app.controller 'RutController', ->
+  app.controller 'RutController', ['$filter', ($filter)->
     this.ruts = []
     this.input = ''
     this.lastInput = ''
@@ -54,7 +54,19 @@ do ->
         number = Math.floor(number / 10)
       if S then S - 1 else 'K'
 
+    this.download = ->
+      csvString = this.ruts.map($filter('rutFormat')).join('%0A')
+      a = document.createElement('a')
+      a.href = 'data:attachment/txt,' + csvString
+      a.target = '_blank'
+      a.download = 'gen-ruts-' + Date.now() + '.txt'
+      document.body.appendChild a
+      a.click()
+      return
+
     this.generateRut()
+
+  ]
 
   app.filter 'rutFormat', ->
     (input) ->
