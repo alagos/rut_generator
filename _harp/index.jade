@@ -11,9 +11,13 @@
         | y ver como la magia nace.
         | Si no te gusta escribir y no tienes suficientes RUTs en tu vida, puedes
       p.lead
-        button.btn.btn-lg.btn-default(ng-click="rutCtrl.generateRut()") Generar más RUTs al azar
+        button.btn.btn-lg.btn-default(ng-click="rutCtrl.generateRut()")
+          span.glyphicon.glyphicon-repeat(aria-hidden="true")
+          |  Generar más RUTs al azar
       p.lead
-        button.btn.btn-lg.btn-default(ng-click="rutCtrl.download()") Descargar RUTs generados
+        button.btn.btn-lg.btn-default(ng-click="rutCtrl.download()")
+          span.glyphicon.glyphicon-download-alt(aria-hidden="true")
+          |  Descargar RUTs generados
   .row
     .col-md-3(ng-repeat="rut in rutCtrl.ruts")
       h4(select-text) {{ rut | rutFormat }}
