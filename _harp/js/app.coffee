@@ -9,8 +9,9 @@ do ->
     this.rutOpts =
       quantity: 12
       minValue: 1000000
-      maxValue: 99999999
+      maxValue: 40000000
 
+    # Generates a rut according the given options
     this.generateRut = ->
       if this.input == '' || this.getInput() != this.lastInput
         genRuts = []
@@ -33,6 +34,7 @@ do ->
         this.lastInput = this.getInput()
         this.ruts = genRuts
 
+    # Returns a random number between the max/min values
     this.getRandomNumber = ->
       min = this.rutOpts.minValue
       max = this.rutOpts.maxValue
@@ -43,9 +45,11 @@ do ->
       else
         inputNumber
 
+    # Removes from input all the characters diferent than a digit
     this.getInput =  ->
       this.input.replace(/\D/g, '')
 
+    # Returns the module for a rut number
     this.getMod = (number) ->
       M = 0
       S = 1
@@ -54,6 +58,7 @@ do ->
         number = Math.floor(number / 10)
       if S then S - 1 else 'K'
 
+    # Generates a txt file "on-the-fly" with the generated ruts to download
     this.download = ->
       csvString = this.ruts.map($filter('rutFormat')).join('%0A')
       a = document.createElement('a')
@@ -68,6 +73,7 @@ do ->
 
   ]
 
+  # Returns a rut object in the classic format with dots and hyphen
   app.filter 'rutFormat', ->
     (input) ->
       input.number.toLocaleString('cl-ES') + '-' + input.mod;

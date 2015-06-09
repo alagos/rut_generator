@@ -1,23 +1,44 @@
 .inner.cover(ng-controller="RutController as rutCtrl")
   .row
-    form
-      h1.cover-heading Generador de RUT
-      p.lead
-        | Simplemente haz clic en cualquier rut generado para seleccionarlo y luego copiar.
-        | También puedes comenzar a
-      p.lead
-        input(type='text', placeholder='escribir un RUT', ng-model='rutCtrl.input', ng-change="rutCtrl.generateRut()", maxlength=12)
-      p.lead
-        | y ver como la magia nace.
-        | Si no te gusta escribir y no tienes suficientes RUTs en tu vida, puedes
-      p.lead
-        button.btn.btn-lg.btn-default(ng-click="rutCtrl.generateRut()")
-          span.glyphicon.glyphicon-repeat(aria-hidden="true")
-          |  Generar más RUTs al azar
-      p.lead
-        button.btn.btn-lg.btn-default(ng-click="rutCtrl.download()")
-          span.glyphicon.glyphicon-download-alt(aria-hidden="true")
-          |  Descargar RUTs generados
+    h1.cover-heading Generador de RUT
+    p.lead
+      | Simplemente haz clic en cualquier rut generado para seleccionarlo y luego copiar.
+      | También puedes comenzar a
+    p.lead
+      input(type='text', placeholder='escribir un RUT', ng-model='rutCtrl.input', ng-change="rutCtrl.generateRut()", maxlength=12)
+    p.lead
+      | y ver como la magia nace.
+      | Si no tienes suficientes RUTs en tu vida, puedes
+    p.lead
+      button.btn.btn-default(type='button', data-toggle='collapse', data-target='#options', aria-expanded='false', aria-controls='options')
+        span.glyphicon.glyphicon-option-vertical(aria-hidden="true")
+        |  acceder a opciones!
+    #options.collapse
+      .well
+        form.form-horizontal
+          .form-group
+            label.col-sm-4.control-label RUTs generados
+            .col-sm-3
+              input.form-control(type='number', ng-model="rutCtrl.rutOpts.quantity", maxlength=8)
+          .form-group
+            label.col-sm-4.control-label Valor mínimo
+            .col-sm-3
+              input.form-control(type='number', ng-model="rutCtrl.rutOpts.minValue", maxlength=8)
+          .form-group
+            label.col-sm-4.control-label Valor máximo
+            .col-sm-3
+              input.form-control(type='number', ng-model="rutCtrl.rutOpts.maxValue", maxlength=8)
+          .form-group
+            .col-sm-offset-4.col-sm-3
+              button.btn.btn-default(ng-click="rutCtrl.download()")
+                span.glyphicon.glyphicon-download-alt(aria-hidden="true")
+                |  Descargar RUTs generados
+    p.lead
+      | y luego
+    p.lead
+      button.btn.btn-lg.btn-default(ng-click="rutCtrl.generateRut()")
+        span.glyphicon.glyphicon-repeat(aria-hidden="true")
+        |  Generar más RUTs al azar
   .row
-    .col-md-3(ng-repeat="rut in rutCtrl.ruts")
+    .col-md-3(ng-repeat="rut in rutCtrl.ruts| orderBy:'number'")
       h4(select-text) {{ rut | rutFormat }}
